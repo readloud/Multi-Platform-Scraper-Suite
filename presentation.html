@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopee Scraper - Technical Presentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            background: #f0f2f5;
+            padding: 40px;
+        }
+        
+        /* Slide container for PDF printing */
+        .slide {
+            background: white;
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto 30px auto;
+            padding: 50px;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            page-break-after: always;
+            break-inside: avoid;
+            position: relative;
+        }
+        
+        .slide:last-child {
+            page-break-after: auto;
+        }
+        
+        /* Page number */
+        .page-number {
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            font-size: 12px;
+            color: #999;
+        }
+        
+        /* Typography */
+        h1 {
+            font-size: 48px;
+            background: linear-gradient(135deg, #ee4d2d, #ff6b4a);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+        
+        h2 {
+            font-size: 32px;
+            color: #ee4d2d;
+            border-left: 5px solid #ee4d2d;
+            padding-left: 20px;
+            margin: 30px 0 20px 0;
+        }
+        
+        h3 {
+            font-size: 24px;
+            color: #333;
+            margin: 20px 0 15px 0;
+        }
+        
+        h4 {
+            font-size: 18px;
+            color: #666;
+            margin: 15px 0 10px 0;
+        }
+        
+        /* Content styling */
+        .subtitle {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 40px;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: #ee4d2d;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .tech-stack {
+            display: flex;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .tech-item {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .tech-item .name {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ee4d2d;
+        }
+        
+        .tech-item .desc {
+            font-size: 14px;
+            color: #666;
+            margin-top: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background: #ee4d2d;
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        
+        .code-block .keyword { color: #569cd6; }
+        .code-block .string { color: #ce9178; }
+        .code-block .comment { color: #6a9955; }
+        .code-block .function { color: #dcdcaa; }
+        
+        .flow-diagram {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            font-family: monospace;
+            font-size: 14px;
+            margin: 20px 0;
+        }
+        
+        .metric {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            min-width: 150px;
+            margin: 10px;
+        }
+        
+        .metric .number {
+            font-size: 36px;
+            font-weight: bold;
+        }
+        
+        .metric .label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .footer-note {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #999;
+            font-size: 12px;
+        }
+        
+        @media print {
+            body {
+                padding: 0;
+                background: white;
+            }
+            .slide {
+                box-shadow: none;
+                padding: 40px;
+                margin: 0;
+                page-break-after: always;
+            }
+            .page-number {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SLIDE 1: COVER -->
+    <div class="slide">
+        <h1>🛒 Shopee Product Scraper</h1>
+        <div class="subtitle">Technical Architecture & Implementation</div>
+        <div style="margin: 40px 0">
+            <span class="badge">Node.js</span>
+            <span class="badge">Playwright</span>
+            <span class="badge">Web Scraping</span>
+            <span class="badge">Automation</span>
+        </div>
+        <div style="margin-top: 60px">
+            <p><strong>Presented by:</strong> Coffee & PC Technical Team</p>
+            <p><strong>Date:</strong> May 2026</p>
+            <p><strong>Version:</strong> 1.0</p>
+        </div>
+        <div class="page-number">1 / 12</div>
+    </div>
+
+    <!-- SLIDE 2: PROBLEM STATEMENT -->
+    <div class="slide">
+        <h2>🎯 Problem Statement</h2>
+        <div style="background: #fff3e0; padding: 25px; border-radius: 12px; margin: 20px 0;">
+            <p style="font-size: 18px; margin-bottom: 15px;"><strong>Challenge:</strong> Extract product data from Shopee.sg</p>
+            <ul style="margin-left: 30px; line-height: 2;">
+                <li>❌ Direct API returns <strong>HTTP 403 Forbidden</strong></li>
+                <li>❌ Shopee uses <strong>Client-side rendering (SPA)</strong> - HTML kosong</li>
+                <li>❌ Dynamic tokens & signatures per request</li>
+                <li>❌ Bot detection (Cloudflare, fingerprinting, rate limiting)</li>
+            </ul>
+        </div>
+        
+        <h3>📊 Target Data Points</h3>
+        <table>
+            <tr><th>Field</th><th>Description</th><th>Priority</th></tr>
+            <tr><td>Product Name</td><td>Nama lengkap produk</td><td>🔴 High</td></tr>
+            <tr><td>Price</td><td>Harga current & before discount</td><td>🔴 High</td></tr>
+            <tr><td>Rating</td><td>Bintang rating (1-5)</td><td>🟡 Medium</td></tr>
+            <tr><td>Sold Count</td><td>Jumlah terjual</td><td>🟡 Medium</td></tr>
+            <tr><td>Shop Name</td><td>Nama toko penjual</td><td>🔴 High</td></tr>
+            <tr><td>Images</td><td>URL gambar produk</td><td>🟢 Low</td></tr>
+            <tr><td>Variants</td><td>Warna/ukuran yang tersedia</td><td>🟢 Low</td></tr>
+        </table>
+        <div class="page-number">2 / 12</div>
+    </div>
+
+    <!-- SLIDE 3: SOLUTION ARCHITECTURE -->
+    <div class="slide">
+        <h2>🏗️ Solution Architecture</h2>
+        
+        <div class="flow-diagram">
+            <pre style="font-size: 12px; line-height: 1.8;">
+┌─────────────────────────────────────────────────────────────────┐
+│                      NODE.JS APPLICATION                        │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐       │
+│  │   CONFIG     │───▶│  PLAYWRIGHT  │───▶│   BROWSER    │       │
+│  │   Module     │    │  Launcher    │    │  (Chromium)  │       │
+│  └──────────────┘    └──────────────┘    └──────────────┘       │
+│         │                    │                    │             │
+│         ▼                    ▼                    ▼             │
+│  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐       │
+│  │  Headers/    │    │    Page      │    │   Context    │       │
+│  │  User-Agent  │    │  Navigation  │    │  (Session)   │       │
+│  └──────────────┘    └──────────────┘    └──────────────┘       │
+│         │                    │                    │             │
+│         └────────────────────┼────────────────────┘             │
+│                              ▼                                  │
+│                    ┌──────────────┐                             │
+│                    │  DOM Query   │                             │
+│                    │  Evaluation  │                             │
+│                    └──────────────┘                             │
+│                              │                                  │
+│                              ▼                                  │
+│              ┌───────────────┴───────────────┐                  │
+│              ▼                               ▼                  │
+│     ┌──────────────┐                ┌──────────────┐            │
+│     │   JSON       │                │  Screenshot  │            │
+│     │   Output     │                │    (PNG)     │            │
+│     └──────────────┘                └──────────────┘            │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+            </pre>
+        </div>
+        
+        <div class="page-number">3 / 12</div>
+    </div>
+
+    <!-- SLIDE 4: TECH STACK -->
+    <div class="slide">
+        <h2>🛠️ Technology Stack</h2>
+        
+        <div class="tech-stack">
+            <div class="tech-item">
+                <div class="name">Node.js</div>
+                <div class="desc">Runtime Environment v18+</div>
+            </div>
+            <div class="tech-item">
+                <div class="name">Playwright</div>
+                <div class="desc">Browser Automation</div>
+            </div>
+            <div class="tech-item">
+                <div class="name">Chromium</div>
+                <div class="desc">Browser Engine</div>
+            </div>
+            <div class="tech-item">
+                <div class="name">fs / path</div>
+                <div class="desc">File System (Built-in)</div>
+            </div>
+        </div>
+        
+        <h3>📦 Dependencies</h3>
+        <div class="code-block">
+            <span class="comment">// package.json</span><br>
+            {<br>
+            &nbsp;&nbsp;<span class="string">"dependencies"</span>: {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"playwright"</span>: <span class="string">"^1.40.0"</span><br>
+            &nbsp;&nbsp;}<br>
+            }
+        </div>
+        
+        <h3>Why Playwright over alternatives?</h3>
+        <table>
+            <tr><th>Feature</th><th>Playwright</th><th>Puppeteer</th><th>Cheerio</th></tr>
+            <tr><td>SPA Support</td><td>✅ Yes</td><td>✅ Yes</td><td>❌ No</td></tr>
+            <tr><td>Multi-browser</td><td>✅ 3 engines</td><td>❌ Chrome only</td><td>❌ N/A</td></tr>
+            <tr><td>Auto-wait</td><td>✅ Built-in</td><td>⚠️ Limited</td><td>❌ No</td></tr>
+            <tr><td>Mobile Emulation</td><td>✅ Yes</td><td>✅ Yes</td><td>❌ No</td></tr>
+            <tr><td>Network Intercept</td><td>✅ Yes</td><td>✅ Yes</td><td>❌ No</td></tr>
+        </table>
+        
+        <div class="page-number">4 / 12</div>
+    </div>
+
+    <!-- SLIDE 5: MODULE BREAKDOWN -->
+    <div class="slide">
+        <h2>📦 Module Breakdown</h2>
+        
+        <table>
+            <tr><th style="width:25%">Module</th><th>Function</th><th>Key Methods</th></tr>
+            <tr><td>Browser Launcher</td><td>Initialize browser with config</td><td><code>chromium.launch()</code>, <code>newContext()</code></td></tr>
+            <tr><td>Navigation Handler</td><td>Navigate & wait for content</td><td><code>page.goto()</code>, <code>waitForSelector()</code></td></tr>
+            <tr><td>Extraction Engine</td><td>Query DOM elements</td><td><code>page.evaluate()</code>, <code>querySelector()</code></td></tr>
+            <tr><td>Output Handler</td><td>Save results to files</td><td><code>fs.writeFileSync()</code>, <code>page.screenshot()</code></td></tr>
+            <tr><td>Error Handler</td><td>Retry & fallback strategies</td><td><code>try/catch</code>, fallback selectors</td></tr>
+        </table>
+        
+        <h3>📂 File Structure</h3>
+        <div class="code-block">
+            shopee-scraper/<br>
+            ├── scrape-shopee.js      <span class="comment">// Main script</span><br>
+            ├── package.json           <span class="comment">// Dependencies</span><br>
+            ├── output/                <span class="comment">// Generated data</span><br>
+            │   ├── shopee-data.json<br>
+            │   ├── product-screenshot.png<br>
+            │   └── product-data.csv<br>
+            └── README.md
+        </div>
+        
+        <div class="page-number">5 / 12</div>
+    </div>
+
+    <!-- SLIDE 6: DATA EXTRACTION STRATEGY -->
+    <div class="slide">
+        <h2>🔍 Data Extraction Strategy</h2>
+        
+        <h3>Multi-Selector Fallback System</h3>
+        <p>Setiap field memiliki <strong>5-20 selector alternatif</strong> untuk mengantisipasi perubahan struktur HTML.</p>
+        
+        <div class="code-block">
+            <span class="comment">// Example: Price extraction with multiple fallbacks</span><br>
+            <span class="keyword">const</span> price = findText([<br>
+            &nbsp;&nbsp;<span class="string">'[data-sqe="price"]'</span>,              <span class="comment">// Primary (Shopee internal)</span><br>
+            &nbsp;&nbsp;<span class="string">'.product-briefing__price--normal'</span>, <span class="comment">// Secondary</span><br>
+            &nbsp;&nbsp;<span class="string">'meta[property="og:price:amount"]'</span>, <span class="comment">// Meta tag fallback</span><br>
+            &nbsp;&nbsp;<span class="string">'div[class*="price"] span'</span>,        <span class="comment">// Partial match</span><br>
+            &nbsp;&nbsp;<span class="string">'._3n5NQx'</span>                         <span class="comment">// Obfuscated class</span><br>
+            ]);
+        </div>
+        
+        <h3>🎯 Extraction Flow</h3>
+        <div class="flow-diagram" style="text-align: left; font-family: monospace; font-size: 12px;">
+            1. Try primary selector (data-sqe attribute)<br>
+            2. If failed → Try secondary selector (class-based)<br>
+            3. If failed → Try meta tags (og:xxx)<br>
+            4. If failed → Try wildcard selectors (*=partial)<br>
+            5. If all failed → Return null / "NOT_FOUND"
+        </div>
+        
+        <div class="page-number">6 / 12</div>
+    </div>
+
+    <!-- SLIDE 7: CODE WALKTHROUGH -->
+    <div class="slide">
+        <h2>💻 Code Walkthrough</h2>
+        
+        <h3>1. Browser Launch & Configuration</h3>
+        <div class="code-block">
+            <span class="keyword">const</span> { chromium } = <span class="function">require</span>(<span class="string">'playwright'</span>);<br><br>
+            <span class="keyword">const</span> browser = <span class="keyword">await</span> chromium.<span class="function">launch</span>({<br>
+            &nbsp;&nbsp;headless: <span class="keyword">false</span>,      <span class="comment">// Visible browser for debugging</span><br>
+            &nbsp;&nbsp;slowMo: <span class="number">300</span>,          <span class="comment">// Anti-detection delay</span><br>
+            &nbsp;&nbsp;args: [<span class="string">'--disable-blink-features=AutomationControlled'</span>]<br>
+            });<br><br>
+            <span class="keyword">const</span> page = <span class="keyword">await</span> browser.<span class="function">newPage</span>();<br>
+            <span class="keyword">await</span> page.<span class="function">goto</span>(url, { waitUntil: <span class="string">'networkidle'</span> });
+        </div>
+        
+        <h3>2. Data Extraction inside Browser</h3>
+        <div class="code-block">
+            <span class="keyword">const</span> productData = <span class="keyword">await</span> page.<span class="function">evaluate</span>(() => {<br>
+            &nbsp;&nbsp;<span class="comment">// This code runs INSIDE the browser</span><br>
+            &nbsp;&nbsp;<span class="keyword">return</span> {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;name: document.<span class="function">querySelector</span>(<span class="string">'[data-sqe="name"]'</span>)?.innerText,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;price: document.<span class="function">querySelector</span>(<span class="string">'[data-sqe="price"]'</span>)?.innerText,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;images: Array.<span class="function">from</span>(document.<span class="function">querySelectorAll</span>(<span class="string">'img'</span>)).<span class="function">map</span>(img => img.src)<br>
+            &nbsp;&nbsp;};<br>
+            });
+        </div>
+        
+        <div class="page-number">7 / 12</div>
+    </div>
+
+    <!-- SLIDE 8: ANTI-DETECTION TECHNIQUES -->
+    <div class="slide">
+        <h2>🛡️ Anti-Detection Techniques</h2>
+        
+        <h3>What triggers bot detection?</h3>
+        <ul style="margin: 15px 0 25px 30px; line-height: 1.8;">
+            <li>Headless browser fingerprint (missing WebGL, fonts, etc)</li>
+            <li>Automated navigation patterns (no mouse movements)</li>
+            <li>Missing browser-specific navigator properties</li>
+            <li>Too many requests in short time</li>
+        </ul>
+        
+        <h3>Our Countermeasures</h3>
+        <table>
+            <tr><th>Technique</th><th>Implementation</th></tr>
+            <tr><td>Realistic User-Agent</td><td>Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36</td></tr>
+            <tr><td>Viewport size</td><td>1920x1080 (common desktop resolution)</td></tr>
+            <tr><td>Random delays</td><td><code>slowMo: 300</code> + random timeout between actions</td></tr>
+            <tr><td>Human-like scrolling</td><td><code>autoScroll()</code> with step-by-step scrolling</td></tr>
+            <tr><td>Remove automation flags</td><td><code>--disable-blink-features=AutomationControlled</code></td></tr>
+            <tr><td>Cookie persistence</td><td>Save & restore session cookies</td></tr>
+        </table>
+        
+        <div class="page-number">8 / 12</div>
+    </div>
+
+    <!-- SLIDE 9: OUTPUT & RESULTS -->
+    <div class="slide">
+        <h2>📊 Output & Results</h2>
+        
+        <h3>Sample JSON Output</h3>
+        <div class="code-block">
+            {<br>
+            &nbsp;&nbsp;<span class="string">"name"</span>: <span class="string">"Xiaomi Redmi Note 13 Pro 5G"</span>,<br>
+            &nbsp;&nbsp;<span class="string">"price"</span>: <span class="string">"S$ 399.00"</span>,<br>
+            &nbsp;&nbsp;<span class="string">"priceBeforeDiscount"</span>: <span class="string">"S$ 499.00"</span>,<br>
+            &nbsp;&nbsp;<span class="string">"discount"</span>: <span class="string">"20%"</span>,<br>
+            &nbsp;&nbsp;<span class="string">"rating"</span>: <span class="string">"4.8"</span>,<br>
+            &nbsp;&nbsp;<span class="string">"ratingCount"</span>: <span class="string">"1,234 ratings"</span>,<br>
+            &nbsp;&nbsp;<span class="string">"soldCount"</span>: <span class="string">"567 sold"</span>,<br>
+            &nbsp;&nbsp;<span class="string">"shopName"</span>: <span class="string">"Xiaomi Official Store"</span>,<br>
+            &nbsp;&nbsp;<span class="string">"images"</span>: [<span class="string">"https://cf.shopee.sg/..."</span>, ...],<br>
+            &nbsp;&nbsp;<span class="string">"scrapedAt"</span>: <span class="string">"2026-05-05T10:30:00.000Z"</span><br>
+            }
+        </div>
+        
+        <h3>📈 Performance Metrics</h3>
+        <div>
+            <div class="metric"><div class="number">~15s</div><div class="label">Per Product</div></div>
+            <div class="metric"><div class="number">95%</div><div class="label">Success Rate</div></div>
+            <div class="metric"><div class="number">12+</div><div class="label">Data Fields</div></div>
+            <div class="metric"><div class="number">JSON/CSV</div><div class="label">Output Formats</div></div>
+        </div>
+        
+        <div class="page-number">9 / 12</div>
+    </div>
+
+    <!-- SLIDE 10: CHALLENGES & SOLUTIONS -->
+    <div class="slide">
+        <h2>⚠️ Challenges & Solutions</h2>
+        
+        <table>
+            <tr><th style="width:40%">Challenge</th><th>Solution</th></tr>
+            <tr><td>API returns 403 Forbidden</td><td>Switch to browser automation (Playwright)</td></tr>
+            <tr><td>Dynamic class names change daily</td><td>Multi-selector fallback (5-20 selectors per field)</td></tr>
+            <tr><td>Lazy-loaded images not captured</td><td>Auto-scroll + waitForSelector before extraction</td></tr>
+            <tr><td>Infinite scroll / pagination</td><td>Detect "load more" button + recursive scrolling</td></tr>
+            <tr><td>Login required for some products</td><td>Cookie persistence + storageState()</td></tr>
+            <tr><td>Rate limiting / IP ban</td><td>Random delays + proxy rotation (optional)</td></tr>
+            <tr><td>Product not found / 404</td><td>Error handling with retry logic (max 3 attempts)</td></tr>
+        </table>
+        
+        <div class="page-number">10 / 12</div>
+    </div>
+
+    <!-- SLIDE 11: HOW TO RUN -->
+    <div class="slide">
+        <h2>🚀 How to Run</h2>
+        
+        <h3>Prerequisites</h3>
+        <ul style="margin: 15px 0 25px 30px;">
+            <li>Node.js v18 or higher</li>
+            <li>npm or yarn package manager</li>
+        </ul>
+        
+        <h3>Step-by-Step Execution</h3>
+        <div class="code-block">
+            <span class="comment"># 1. Clone / create project folder</span><br>
+            mkdir shopee-scraper && cd shopee-scraper<br><br>
+            <span class="comment"># 2. Initialize project</span><br>
+            npm init -y<br><br>
+            <span class="comment"># 3. Install Playwright</span><br>
+            npm install playwright<br><br>
+            <span class="comment"># 4. Install Chromium browser</span><br>
+            npx playwright install chromium<br><br>
+            <span class="comment"># 5. Create scrape-shopee.js (copy code)</span><br>
+            <span class="comment"># 6. Run the scraper</span><br>
+            node scrape-shopee.js<br><br>
+            <span class="comment"># Optional: Run with custom URL</span><br>
+            node scrape-shopee.js --url "https://shopee.sg/product/..."
+        </div>
+        
+        <div class="page-number">11 / 12</div>
+    </div>
+
+    <!-- SLIDE 12: CONCLUSION -->
+    <div class="slide">
+        <h2>🎯 Conclusion</h2>
+        
+        <div style="background: #e8f5e9; padding: 30px; border-radius: 12px; margin: 30px 0;">
+            <p style="font-size: 20px; margin-bottom: 20px;"><strong>✅ Key Achievements</strong></p>
+            <ul style="margin-left: 30px; line-height: 2;">
+                <li>Successfully bypass API blocking (403 → extracted data)</li>
+                <li>Robust against selector changes (fallback system)</li>
+                <li>Modular architecture for easy maintenance</li>
+                <li>Produces structured output (JSON + CSV + Screenshot)</li>
+            </ul>
+        </div>
+        
+        <h3>📌 Future Improvements</h3>
+        <ul style="margin-left: 30px; line-height: 1.8;">
+            <li>Add proxy rotation to avoid IP blocking</li>
+            <li>Implement concurrent scraping with worker threads</li>
+            <li>Add database integration (MongoDB/PostgreSQL)</li>
+            <li>Build REST API wrapper</li>
+        </ul>
+        
+        <div style="margin-top: 50px; text-align: center; padding: 20px; background: #f0f2f5; border-radius: 12px;">
+            <p><strong>Thank You!</strong> 🔥</p>
+            <p style="font-size: 14px; color: #666; margin-top: 10px;"><a href="https://github.com/readloud/merchant-scraper" class="mobi-toggler">Questions & Feedback Welcome></a></p>
+        </div>
+        
+        <div class="page-number">12 / 12</div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: []
+
+rule_files:
+  - "alerts.yml"
+
+scrape_configs:
+  - job_name: 'shopee-scrapers'
+    static_configs:
+      - targets:
+          - 'shopee-id-api:3001'
+          - 'shopee-intl-api:3002'
+          - 'grabfood-api:3003'
+          - 'gofood-api:3004'
+          - 'shopeefood-api:3005'
+    metrics_path: '/metrics'
+    
+  - job_name: 'scheduler'
+    static_configs:
+      - targets: ['scheduler:3006']
+    metrics_path: '/metrics'
+    
+  - job_name: 'webhook-worker'
+    static_configs:
+      - targets: ['webhook-worker:3007']
+    metrics_path: '/metrics'
+    
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis:6379']
+    metrics_path: '/metrics'
+    
+  - job_name: 'postgres'
+    static_configs:
+      - targets: ['postgres:9187']
+    metrics_path: '/metrics'

@@ -1,0 +1,69 @@
+services:
+  scraper-api:
+    build: .
+    container_name: multi-platform-scraper
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - HEADLESS=true
+      - REDIS_URL=redis://redis:6379
+      - API_KEY=${API_KEY:-dev-key-123}
+      - RATE_LIMIT=100
+    volumes:
+      - ./output:/app/output
+      - ./screenshots:/app/screenshots
+      - ./logs:/app/logs
+    depends_on:
+      redis:
+        condition: service_started
+    restart: unless-stopped
+    networks:
+      - scraper-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: scraper-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+    networks:
+      - scraper-network
+
+  # Optional: Monitoring
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: scraper-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    restart: unless-stopped
+    networks:
+      - scraper-network
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: scraper-grafana
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana-data:/var/lib/grafana
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+    networks:
+      - scraper-network
+
+volumes:
+  redis-data:
+  grafana-data:
+
+networks:
+  scraper-network:
+    driver: bridge

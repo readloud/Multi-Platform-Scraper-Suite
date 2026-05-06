@@ -1,0 +1,128 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Scheduled scraping jobs
+model ScrapeSchedule {
+  id             Int      @id @default(autoincrement())
+  name           String
+  platform       String   // shopee-id, shopee-intl, grabfood, gofood, shopeefood
+  frequency      String   // hourly, daily, weekly, monthly, custom
+  cronExpression String?   // custom cron expression
+  target         String   // products, restaurants, merchants, compare
+  params         Json     // JSON parameters for the job
+  webhookUrl     String?
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  
+  executions ScrapeExecution[]
+}
+
+// Execution history
+model ScrapeExecution {
+  id          Int      @id @default(autoincrement())
+  scheduleId  Int
+  schedule    ScrapeSchedule @relation(fields: [scheduleId], references: [id])
+  status      String   // success, failed, pending
+  result      Json?    // scraped data
+  error       String?
+  executedAt  DateTime @default(now())
+  
+  @@index([scheduleId])
+  @@index([executedAt])
+}
+
+// Scraped product data
+model ProductData {
+  id          String   @id @default(cuid())
+  platform    String
+  region      String
+  productId   String
+  shopId      String?
+  name        String
+  price       String
+  priceBefore String?
+  rating      Float?
+  soldCount   Int?
+  shopName    String
+  url         String
+  rawData     Json?
+  scrapedAt   DateTime @default(now())
+  
+  @@unique([platform, region, productId])
+  @@index([platform, region])
+  @@index([scrapedAt])
+}
+
+// Restaurant data (for food platforms)
+model RestaurantData {
+  id           String   @id @default(cuid())
+  platform     String   // grabfood, gofood, shopeefood
+  region       String
+  restaurantId String
+  name         String
+  cuisine      String?
+  rating       Float?
+  deliveryFee  String?
+  estimatedTime String?
+  isOpen       Boolean?
+  menu         Json?
+  scrapedAt    DateTime @default(now())
+  
+  @@unique([platform, region, restaurantId])
+  @@index([platform, region])
+}
+
+// Webhook configurations
+model WebhookConfig {
+  id        Int      @id @default(autoincrement())
+  name      String
+  url       String
+  events    String[] // array of event types
+  secret    String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+// Proxy pool
+model Proxy {
+  id         Int      @id @default(autoincrement())
+  url        String   @unique
+  type       String   // http, https, socks5
+  username   String?
+  password   String?
+  isHealthy  Boolean  @default(true)
+  successCount Int    @default(0)
+  failureCount Int    @default(0)
+  lastUsed   DateTime?
+  createdAt  DateTime @default(now())
+}
+
+// Rate limit tracking
+model RateLimit {
+  id        Int      @id @default(autoincrement())
+  platform  String
+  region    String
+  remaining Int
+  resetAt   DateTime
+  createdAt DateTime @default(now())
+  
+  @@unique([platform, region])
+}
+
+// Alert history
+model Alert {
+  id        Int      @id @default(autoincrement())
+  type      String   // error, warning, info
+  platform  String?
+  message   String
+  data      Json?
+  isResolved Boolean  @default(false)
+  createdAt DateTime @default(now())
+}

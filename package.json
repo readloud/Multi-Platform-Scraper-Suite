@@ -1,0 +1,56 @@
+{
+  "name": "multi-platform-scraper-suite",
+  "version": "2.0.0",
+  "description": "Multi-platform web scraper for Shopee, GrabFood, GoFood, and ShopeeFood",
+  "keywords": [
+    "shopee",
+    "scraper"
+  ],
+  "homepage": "https://github.com/readloud/multi-platform-scraper-suite#readme",
+  "bugs": {
+    "url": "https://github.com/readloud/multi-platform-scraper-suite/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/readloud/multi-platform-scraper-suite.git"
+  },
+  "license": "ISC",
+  "author": "readloud",
+  "type": "commonjs",
+  "main": "api/server.js",
+  "scripts": {
+    "start": "node api/server.js",
+    "dev": "nodemon api/server.js",
+    "shopee:id": "node -e \"require('./src/platforms/shopee/shopee-id').test()\"",
+    "shopee:intl": "node -e \"require('./src/platforms/shopee/shopee-intl').test()\"",
+    "grabfood": "node -e \"require('./src/platforms/grabfood/grabfood-base').test()\"",
+    "gofood": "node -e \"require('./src/platforms/gofood/gofood-base').test()\"",
+    "shopeefood": "node -e \"require('./src/platforms/shopee-food/shopee-food-base').test()\"",
+    "docker:build": "docker-compose -f docker/docker-compose-all.yml build",
+    "docker:up": "docker-compose -f docker/docker-compose-all.yml up -d",
+    "docker:down": "docker-compose -f docker/docker-compose-all.yml down"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "playwright": "^1.40.0",
+    "bull": "^4.11.5",
+    "redis": "^4.6.7",
+    "winston": "^3.11.0",
+    "express-rate-limit": "^7.1.5",
+    "express-validator": "^7.0.1",
+    "helmet": "^7.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "axios": "^1.6.2",
+    "json2csv": "^6.0.0-alpha.2",
+    "node-cron": "^3.0.3",
+    "prom-client": "^15.0.0",
+    "compression": "^1.7.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "jest": "^29.7.0",
+    "prisma": "^5.7.0",
+    "@prisma/client": "^5.7.0"
+  }
+}

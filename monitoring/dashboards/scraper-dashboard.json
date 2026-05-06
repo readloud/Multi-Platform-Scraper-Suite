@@ -1,0 +1,88 @@
+{
+  "dashboard": {
+    "title": "Multi-Platform Scraper Dashboard",
+    "description": "Real-time monitoring for Shopee, GrabFood, GoFood, ShopeeFood scrapers",
+    "tags": ["scraper", "shopee", "grabfood", "gofood"],
+    "timezone": "browser",
+    "panels": [
+      {
+        "title": "Scraping Success Rate",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "sum(rate(scrape_success_total[5m])) / sum(rate(scrape_total[5m])) * 100",
+            "legendFormat": "Success Rate"
+          }
+        ],
+        "gridPos": { "x": 0, "y": 0, "w": 6, "h": 4 }
+      },
+      {
+        "title": "Active Jobs per Platform",
+        "type": "bargauge",
+        "targets": [
+          {
+            "expr": "sum by(platform) (bull_queue_active_count)",
+            "legendFormat": "{{platform}}"
+          }
+        ],
+        "gridPos": { "x": 6, "y": 0, "w": 6, "h": 4 }
+      },
+      {
+        "title": "Scraping Rate (requests/min)",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(scrape_requests_total[1m])",
+            "legendFormat": "{{platform}} - {{region}}"
+          }
+        ],
+        "gridPos": { "x": 0, "y": 4, "w": 12, "h": 6 }
+      },
+      {
+        "title": "Average Response Time",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, rate(scrape_duration_seconds_bucket[5m]))",
+            "legendFormat": "p95 - {{platform}}"
+          }
+        ],
+        "gridPos": { "x": 0, "y": 10, "w": 12, "h": 6 }
+      },
+      {
+        "title": "Error Distribution",
+        "type": "piechart",
+        "targets": [
+          {
+            "expr": "sum by(error_type) (scrape_errors_total)",
+            "legendFormat": "{{error_type}}"
+          }
+        ],
+        "gridPos": { "x": 0, "y": 16, "w": 6, "h": 6 }
+      },
+      {
+        "title": "Queue Status",
+        "type": "table",
+        "targets": [
+          {
+            "expr": "bull_queue_waiting_count",
+            "legendFormat": "Waiting: {{queue}}"
+          },
+          {
+            "expr": "bull_queue_active_count",
+            "legendFormat": "Active: {{queue}}"
+          },
+          {
+            "expr": "bull_queue_completed_count",
+            "legendFormat": "Completed: {{queue}}"
+          },
+          {
+            "expr": "bull_queue_failed_count",
+            "legendFormat": "Failed: {{queue}}"
+          }
+        ],
+        "gridPos": { "x": 6, "y": 16, "w": 6, "h": 6 }
+      }
+    ]
+  }
+}
