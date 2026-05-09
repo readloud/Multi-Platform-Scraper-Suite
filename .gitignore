@@ -1,18 +1,523 @@
-# Build and Release Folders
-bin-debug/
-bin-release/
-[Oo]bj/
-[Bb]in/
+# ============================================
+# Dependencies
+# ============================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
 
-# Other files and folders
+# ============================================
+# Environment & Configuration
+# ============================================
+.env
+.env.local
+.env.production
+.env.development
+.env.test
+*.env
+config/local.json
+config/*.local.json
+
+# ============================================
+# Output Directories
+# ============================================
+output/
+outputs/
+scraped-data/
+scraping-results/
+*.json
+*.csv
+*.xlsx
+*.parquet
+
+# Screenshots
+screenshots/
+screenshots/**/*.png
+screenshots/**/*.jpg
+screenshots/**/*.jpeg
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+
+# ============================================
+# Logs
+# ============================================
+logs/
+logs/**/*.log
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+pm2-*.log
+pm2.log
+
+# Winston log rotation
+*-*.log
+combined-*.log
+error-*.log
+exceptions.log
+rejections.log
+*.log.gz
+
+# ============================================
+# Database
+# ============================================
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+*.pgsql
+*.pgdump
+postgres-data/
+redis-data/
+*.dump
+
+# Prisma
+prisma/*.db
+prisma/*.db-journal
+prisma/migrations/*.sql
+prisma/dev.db
+prisma/dev.db-journal
+
+# ============================================
+# Cache & Temporary Files
+# ============================================
+.cache/
+.tmp/
+.temp/
+tmp/
+temp/
+*.tmp
+*.temp
+*.cache
+.cache-loader
+.eslintcache
+.prettiercache
+.stylelintcache
+.parcel-cache/
+.next/
+.nuxt/
+.output/
+out/
+
+# Playwright
+test-results/
+playwright-report/
+playwright/.cache/
+*.webm
+*.mp4
+*.mov
+
+# ============================================
+# IDE & Editor Files
+# ============================================
+# VSCode
+.vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# IntelliJ / WebStorm / PhpStorm
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+.idea_modules/
+.project
+.classpath
 .settings/
+*.swp
+*.swo
+*~
+.DS_Store
 
-# Executables
-*.swf
-*.air
-*.ipa
-*.apk
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
 
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-# should NOT be excluded as they contain compiler settings and other important
-# information for Eclipse / Flash Builder.
+# Vim
+*.swp
+*.swo
+*~
+.vim/
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+# ============================================
+# OS Generated Files
+# ============================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.dll
+*.exe
+*.so
+*.dylib
+desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msm
+*.msu
+*.lnk
+
+# ============================================
+# Testing & Coverage
+# ============================================
+coverage/
+.nyc_output/
+*.lcov
+*.lcov.info
+*.xml
+.jest/
+test-reports/
+test-results/
+tests/e2e/reports/
+.coveralls.yml
+
+# ============================================
+# Build & Distribution
+# ============================================
+dist/
+build/
+lib/
+lib-cov/
+*.la
+*.o
+*.obj
+*.a
+*.lib
+*.d.ts.map
+*.js.map
+*.min.js
+*.min.css
+bun.lockb
+deno.lock
+
+# ============================================
+# Docker
+# ============================================
+docker-compose.override.yml
+docker-compose.*.yml
+!.docker/docker-compose-all.yml
+!.docker/docker-compose.prod.yml
+.docker/
+docker/
+!docker/Dockerfile.*
+!docker/docker-compose*.yml
+*.tar
+*.tar.gz
+*.tgz
+*.dockerignore
+
+# ============================================
+# SSL Certificates
+# ============================================
+*.pem
+*.crt
+*.key
+*.csr
+*.p12
+*.pfx
+ssl/
+certs/
+certificates/
+
+# ============================================
+# Authentication & Tokens
+# ============================================
+tokens/
+token.json
+*.token
+*.jwt
+*.secret
+*.key
+cookies.json
+session.json
+*_token.json
+*_token.js
+.htpasswd
+
+# ============================================
+# Proxy Files
+# ============================================
+proxies.txt
+proxy-list.txt
+proxy.txt
+*.proxy
+
+# ============================================
+# Playwright & Browser Files
+# ============================================
+playwright/.cache/
+playwright/browsers/
+playwright/driver/
+browsers/
+chromium/
+firefox/
+webkit/
+*.crx
+*.nexe
+
+# ============================================
+# Backup & Archive
+# ============================================
+*.bak
+*.backup
+*.old
+*.orig
+*.save
+*.swp
+*.swo
+*~
+
+backups/
+backup/
+archive/
+archives/
+*.zip
+*.7z
+*.rar
+*.tar
+*.gz
+*.bz2
+
+# ============================================
+# Documentation
+# ============================================
+docs/_build/
+docs/api/
+docs/generated/
+docs/out/
+site/
+*.pdf
+*.epub
+*.mobi
+*.dvi
+*.ps
+
+# ============================================
+# Temporary Runtime Files
+# ============================================
+*.pid
+*.seed
+*.pid.lock
+*.lock
+.lock-wscript
+runtime/
+run/
+pid/
+*.sock
+*.socket
+*.port
+
+# ============================================
+# Monitoring & Metrics
+# ============================================
+prometheus-data/
+grafana-data/
+*.metrics
+*.prom
+*.bench
+*.perf
+trace.json
+profiling/
+
+# ============================================
+# Data Files (Scraped Results - Optional to keep)
+# ============================================
+# Uncomment if you don't want to commit scraped data
+# *.json
+# *.csv
+# *.xlsx
+
+# ============================================
+# Sensitive Information
+# ============================================
+*.secret
+*.key
+*.pem
+*.crt
+*.password
+*.credential
+*.credentials
+secrets/
+secrets.json
+.credentials/
+.ssh/
+.gnupg/
+
+# ============================================
+# Cloud & Deployment
+# ============================================
+.terraform/
+terraform.tfstate
+terraform.tfstate.backup
+*.tfvars
+.terraform.lock.hcl
+serverless/
+.serverless/
+.cdk/
+cdk.out/
+.aws-sam/
+samconfig.toml
+Dockerfile.*.local
+.ecs/
+.kube/
+helm/
+
+# ============================================
+# CI/CD
+# ============================================
+.github/
+!.github/workflows
+.gitlab/
+!.gitlab-ci.yml
+.ci/
+.circleci/
+.jenkins/
+jenkins/
+travis.yml
+azure-pipelines.yml
+bitbucket-pipelines.yml
+.gitlab-ci.yml
+
+# ============================================
+# Node.js Runtime Specific
+# ============================================
+.nyc_output/
+.grunt/
+bower_components/
+.jshintrc
+.jscsrc
+.eslintignore
+.prettierignore
+.stylelintignore
+.lintstagedrc
+.husky/
+.huskyrc
+.lintstagedrc.js
+.commitlintrc.js
+.release-it.json
+
+# ============================================
+# Next.js / React / Vue Specific
+# ============================================
+.next/
+out/
+.nuxt/
+.cache/
+build/
+dist/
+.storybook/
+storybook-static/
+.vercel/
+.netlify/
+
+# ============================================
+# PM2
+# ============================================
+.pm2/
+pm2.json
+ecosystem.config.js
+
+# ============================================
+# Debugging
+# ============================================
+debug/
+debug.log
+debug-*.log
+*.trace
+*.heapdump
+*.cpuprofile
+*.heapsnapshot
+
+# ============================================
+# User-specific files
+# ============================================
+*.user
+*.userosscache
+*.sln.docstates
+.vs/
+.vscode/settings.json
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dataSources.local.xml
+.idea/dataSources.xml
+.idea/sqlDataSources.xml
+.idea/dynamic.xml
+.idea/uiDesigner.xml
+.idea/vcs.xml
+.idea/jsLinters
+
+# ============================================
+# Project Specific
+# ============================================
+
+# Shopee Scraper Specific
+output/shopee-id/
+output/shopee-intl/
+output/grabfood/
+output/gofood/
+output/shopeefood/
+screenshots/**/*.png
+screenshots/**/*.jpg
+tokens/*.json
+tokens/*.token
+*.cookies.json
+session-*.json
+
+# Temporary extracted data
+temp/
+.temp/
+temp_data/
+.temp_data/
+
+# Large files
+*.mp4
+*.mkv
+*.avi
+*.mov
+*.iso
+*.dmg
+*.psd
+*.ai
+*.eps
+
+# ============================================
+# Keep important files even if they match patterns
+# ============================================
+!.gitignore
+!.env.example
+!package-lock.json
+!package.json
+!README.md
+!LICENSE
+!docker/docker-compose-all.yml
+!docker/docker-compose.prod.yml
+!docker/Dockerfile.*
+!config/default.json
+!config/*.example.json
+!prisma/schema.prisma
+!monitoring/prometheus.yml
+!monitoring/grafana.yml
+!monitoring/alerts.yml

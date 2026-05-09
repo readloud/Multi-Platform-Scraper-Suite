@@ -1,0 +1,58 @@
+{
+  "server": {
+    "port": 3000,
+    "environment": "production",
+    "corsOrigins": ["*"],
+    "rateLimit": {
+      "windowMs": 60000,
+      "max": 100
+    }
+  },
+  "scraping": {
+    "headless": true,
+    "timeout": 45000,
+    "retryAttempts": 3,
+    "retryDelay": 2000,
+    "minRequestInterval": 2000,
+    "concurrentScrapes": 5,
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    }
+  },
+  "database": {
+    "poolMin": 2,
+    "poolMax": 10,
+    "connectionTimeout": 30000
+  },
+  "redis": {
+    "db": 0,
+    "keyPrefix": "scraper:"
+  },
+  "logging": {
+    "level": "info",
+    "maxFiles": 30,
+    "maxSize": "20m"
+  },
+  "output": {
+    "directory": "./output",
+    "formats": ["json", "csv"],
+    "compress": false
+  },
+  "proxy": {
+    "enabled": false,
+    "strategy": "round-robin",
+    "healthCheckInterval": 60000,
+    "rotationInterval": 300000
+  },
+  "webhook": {
+    "retryAttempts": 3,
+    "timeout": 10000,
+    "retryDelay": 2000
+  },
+  "scheduler": {
+    "enabled": true,
+    "timezone": "Asia/Jakarta",
+    "checkInterval": 60000
+  }
+}

@@ -88,6 +88,9 @@ npx playwright install chromium
 npx prisma generate
 npx prisma migrate dev
 
+npm i --save-dev prisma@latest                       │                                                                                     
+npm i @prisma/client@latest 
+
 # Start API server
 npm start
 
@@ -1185,3 +1188,5 @@ docs/assets/
 2. **Tambahkan badge** status build jika menggunakan CI/CD
 3. **Sertakan link** ke dokumentasi live jika ada
 4. **Update versi** sesuai dengan rilis terbaru
+
+Rekomendasi: Untuk development, gunakan SQLite dengan String (solusi di atas). Untuk production, gunakan PostgreSQL agar bisa menggunakan tipe data asli.
