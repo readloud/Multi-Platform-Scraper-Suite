@@ -1079,10 +1079,6 @@ pm2 start api/server.js -i max
 | 429 | Too many requests |
 | 500 | Internal server error |
 
-## 🤝 Contributing
-
-Contribution - see [Contribution](contribution.md) file
-
 ### Development Setup
 
 ```bash
@@ -1151,9 +1147,9 @@ MIT License - see [LICENSE](LICENSE) file
 ## 📞 Support
 
 - **Documentation**: [https://docs.scraper-suite.com](https://docs.scraper-suite.com)
-- **Issues**: [GitHub Issues](https://github.com/readloud/multi-platform-scraper-suite/issues)
+- **Issues**: [GitHub Issues](https://github.com/readloud/scraper-suite/issues)
 - **Discord**: [Join our Discord](https://discord.gg/reasloud/)
-- **Source**: [shopee-sdk](https://github.com/congminh1254/shopee-sdk) | [grab-api-sdk](https://github.com/grab/grabfood-api-sdk-node
+- **Source**: [shopee-sdk](https://github.com/congminh1254/shopee-sdk) | [grab-api=sdk](https://github.com/grab/grabfood-api-sdk-node
 
 ## ⚠️ Disclaimer
 

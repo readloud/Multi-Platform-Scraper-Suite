@@ -17,8 +17,8 @@
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/yourusername/scraper-suite.git
-cd scraper-suite
+git clone https://github.com/readloud/Multi-Platform-Scraper-Suite.git
+cd Multi-Platform-Scraper-Suite
 ```
 
 ### 2. Copy Environment Configuration
