@@ -1081,6 +1081,12 @@ pm2 start api/server.js -i max
 
 ## 🤝 Contributing
 
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
 Contribution - see [Contribution](contribution.md) file
 
 ### Development Setup
@@ -1155,13 +1161,13 @@ MIT License - see [LICENSE](LICENSE) file
 - **Discord**: [Join our Discord](https://discord.gg/reasloud/)
 - **Source**: [shopee-sdk](https://github.com/congminh1254/shopee-sdk) | [grab-api-sdk](https://github.com/grab/grabfood-api-sdk-node
 
+For support, email support@readloud.github.io or join our Slack channel.
+
 ## ⚠️ Disclaimer
 
 This tool is for **educational purposes only**. Please review and comply with each platform's Terms of Service before scraping. Respect robots.txt and implement appropriate rate limiting. The authors are not responsible for any misuse of this software.
 
 ---
-
-**Built with ❤️ for the developer community**
 
 [⬆ Back to Top](#multi-platform-scraper-suite)
 ```
